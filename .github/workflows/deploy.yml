@@ -34,9 +34,9 @@ jobs:
         env:
           ACCOUNT_ID: '799776970420'
           ACCOUNT_NAME: sandbox
-        run: npm run deploy -- --verbose
+        run: npm run deploy
       - name: test deploy
         env:
           ACCOUNT_ID: '012208286009'
           ACCOUNT_NAME: test
-        run: npm run deploy -- --verbose
+        run: npm run deploy
