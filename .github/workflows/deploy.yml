@@ -30,5 +30,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::447002520154:role/github-oidc-stack-DeployRole885297C3-1VVRDT551FCCC
           aws-region: eu-west-1
-      - name: cdk deploy
+      - name: sandbox deploy
+        env:
+          ACCOUNT_ID: 799776970420
+        run: npm run deploy
+      - name: test deploy
+        env:
+          ACCOUNT_ID: 012208286009
         run: npm run deploy

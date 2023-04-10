@@ -8,7 +8,7 @@ import { CicdAwscommunitybuildersOrgStack } from './cicd.awscommunitybuilders.or
 const app = new App();
 new CicdAwscommunitybuildersOrgStack(app, 'CicdAwscommunitybuildersOrgStack', {
   env: {
-    account: '799776970420',
+    account: process.env.ACCOUNT_ID || '799776970420',
     region: process.env.CDK_DEFAULT_REGION,
   },
   name: 'sandbox',
