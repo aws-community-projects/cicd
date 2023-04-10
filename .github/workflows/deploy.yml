@@ -28,7 +28,7 @@ jobs:
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
-          role-to-assume: arn:aws:iam::447002520154:role/github-oidc-stack-DeployRole885297C3-1VVRDT551FCCC
+          role-to-assume: arn:aws:iam::447002520154:role/github-deploy-role-cicd
           aws-region: eu-west-1
       - name: sandbox deploy
         env:
