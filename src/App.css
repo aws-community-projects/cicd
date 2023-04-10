@@ -1,0 +1,20 @@
+.App {
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 1vmin);
+  min-height: 100vh;
+}
+
+.App-content {
+  flex: 1;
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
+
+.content {
+  margin: 5%;
+}

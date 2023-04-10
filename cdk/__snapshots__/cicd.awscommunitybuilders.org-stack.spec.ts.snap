@@ -1,0 +1,581 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Entire Stack > match a snapshot 1`] = `
+{
+  "Mappings": {
+    "AWSCloudFrontPartitionHostedZoneIdMap": {
+      "aws": {
+        "zoneId": "Z2FDTNDATAQYW2",
+      },
+      "aws-cn": {
+        "zoneId": "Z3RFFRIM2A3IF5",
+      },
+    },
+  },
+  "Outputs": {
+    "webUrl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Distribution830FAC52",
+          "DomainName",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+      "DependsOn": [
+        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+      ],
+      "Properties": {
+        "Code": {"S3Bucket":"cdk-hnb659fds-assets-123456-eu-west-1","S3Key":"[HASH REMOVED].zip"},
+        "Handler": "index.handler",
+        "Layers": [
+          {
+            "Ref": "DeployWebsiteAwsCliLayer17DBC421",
+          },
+        ],
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.9",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":s3:::cdk-hnb659fds-assets-123456-eu-west-1",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":s3:::cdk-hnb659fds-assets-123456-eu-west-1/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject",
+                "s3:PutObjectLegalHold",
+                "s3:PutObjectRetention",
+                "s3:PutObjectTagging",
+                "s3:PutObjectVersionTagging",
+                "s3:Abort*",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "WebsiteBucket75C24D94",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "WebsiteBucket75C24D94",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "cloudfront:GetInvalidation",
+                "cloudfront:CreateInvalidation",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+        "Roles": [
+          {
+            "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+      "DependsOn": [
+        "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      ],
+      "Properties": {
+        "Code": {"S3Bucket":"cdk-hnb659fds-assets-123456-eu-west-1","S3Key":"[HASH REMOVED].zip"},
+        "Description": {
+          "Fn::Join": [
+            "",
+            [
+              "Lambda function for auto-deleting objects in ",
+              {
+                "Ref": "WebsiteBucket75C24D94",
+              },
+              " S3 bucket.",
+            ],
+          ],
+        },
+        "Handler": "__entrypoint__.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Sub": "arn:\${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "DeployWebsiteAwsCliLayer17DBC421": {
+      "Properties": {
+        "Content": {"S3Bucket":"cdk-hnb659fds-assets-123456-eu-west-1","S3Key":"[HASH REMOVED].zip"},
+        "Description": "/opt/awscli/aws",
+      },
+      "Type": "AWS::Lambda::LayerVersion",
+    },
+    "DeployWebsiteCustomResourceD116527B": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "DestinationBucketName": {
+          "Ref": "WebsiteBucket75C24D94",
+        },
+        "DistributionId": {
+          "Ref": "Distribution830FAC52",
+        },
+        "DistributionPaths": [
+          "/*",
+        ],
+        "Prune": true,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+            "Arn",
+          ],
+        },
+        "SourceBucketNames": [
+          "cdk-hnb659fds-assets-123456-eu-west-1",
+        ],
+        "SourceObjectKeys": [
+          "f3a2740c33ec4f9b659a4d6d67c833575f0afb449a239afd3e8ce7d191d010fb.zip",
+        ],
+      },
+      "Type": "Custom::CDKBucketDeployment",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "Distribution830FAC52": {
+      "Properties": {
+        "DistributionConfig": {
+          "Aliases": [
+            "cicd.test.awscommunitybuilders.org",
+          ],
+          "CustomErrorResponses": [
+            {
+              "ErrorCode": 404,
+              "ResponseCode": 200,
+              "ResponsePagePath": "/index.html",
+            },
+          ],
+          "DefaultCacheBehavior": {
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+            "Compress": true,
+            "TargetOriginId": "teststackDistributionOrigin12CA40DD6",
+            "ViewerProtocolPolicy": "allow-all",
+          },
+          "DefaultRootObject": "index.html",
+          "Enabled": true,
+          "HttpVersion": "http2",
+          "IPV6Enabled": true,
+          "Origins": [
+            {
+              "DomainName": {
+                "Fn::GetAtt": [
+                  "WebsiteBucket75C24D94",
+                  "RegionalDomainName",
+                ],
+              },
+              "Id": "teststackDistributionOrigin12CA40DD6",
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "origin-access-identity/cloudfront/",
+                      {
+                        "Ref": "OriginAccessIdentityDF1E3CAC",
+                      },
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "ViewerCertificate": {
+            "AcmCertificateArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:arn:",
+                  {
+                    "Ref": "AWS::Partition",
+                  },
+                  ":secretsmanager:eu-west-1:123456:secret:/account/certificateArn:SecretString:::}}",
+                ],
+              ],
+            },
+            "MinimumProtocolVersion": "TLSv1.2_2021",
+            "SslSupportMethod": "sni-only",
+          },
+        },
+      },
+      "Type": "AWS::CloudFront::Distribution",
+    },
+    "HostedZoneDB99F866": {
+      "Properties": {
+        "Name": "cicd.test.awscommunitybuilders.org.",
+      },
+      "Type": "AWS::Route53::HostedZone",
+    },
+    "OriginAccessIdentityDF1E3CAC": {
+      "Properties": {
+        "CloudFrontOriginAccessIdentityConfig": {
+          "Comment": "Allows CloudFront to reach the bucket",
+        },
+      },
+      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+    },
+    "WebsiteBucket75C24D94": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true,
+        },
+        "Tags": [
+          {
+            "Key": "aws-cdk:auto-delete-objects",
+            "Value": "true",
+          },
+          {
+            "Key": "aws-cdk:cr-owned:8eca66c6",
+            "Value": "true",
+          },
+        ],
+      },
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "WebsiteBucketAutoDeleteObjectsCustomResource8750E461": {
+      "DeletionPolicy": "Delete",
+      "DependsOn": [
+        "WebsiteBucketPolicyE10E3262",
+      ],
+      "Properties": {
+        "BucketName": {
+          "Ref": "WebsiteBucket75C24D94",
+        },
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::S3AutoDeleteObjects",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "WebsiteBucketPolicyE10E3262": {
+      "Properties": {
+        "Bucket": {
+          "Ref": "WebsiteBucket75C24D94",
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::GetAtt": [
+                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                    "Arn",
+                  ],
+                },
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "WebsiteBucket75C24D94",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "WebsiteBucket75C24D94",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
+                    "OriginAccessIdentityDF1E3CAC",
+                    "S3CanonicalUserId",
+                  ],
+                },
+              },
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "WebsiteBucket75C24D94",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "WebsiteBucket75C24D94",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
+                    "OriginAccessIdentityDF1E3CAC",
+                    "S3CanonicalUserId",
+                  ],
+                },
+              },
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "WebsiteBucket75C24D94",
+                        "Arn",
+                      ],
+                    },
+                    "/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
+    "ZoneDelegationRecord284DA7AE": {
+      "Properties": {
+        "HostedZoneId": "DUMMY",
+        "Name": "cicd.test.awscommunitybuilders.org.",
+        "ResourceRecords": {
+          "Fn::GetAtt": [
+            "HostedZoneDB99F866",
+            "NameServers",
+          ],
+        },
+        "TTL": "172800",
+        "Type": "NS",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "cicdRecord189503A2": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
+              "Distribution830FAC52",
+              "DomainName",
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::FindInMap": [
+              "AWSCloudFrontPartitionHostedZoneIdMap",
+              {
+                "Ref": "AWS::Partition",
+              },
+              "zoneId",
+            ],
+          },
+        },
+        "HostedZoneId": {
+          "Ref": "HostedZoneDB99F866",
+        },
+        "Name": "cicd.test.awscommunitybuilders.org.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
