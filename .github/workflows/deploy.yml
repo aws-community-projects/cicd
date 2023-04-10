@@ -8,9 +8,9 @@ jobs:
   test:
     name: test
     uses: aws-community-projects/cicd/.github/workflows/test.yml@main
-  deploy-sandbox:
+  deploy:
     needs: test
-    name: deploy to sandbox
+    name: deploy
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,14 +34,9 @@ jobs:
         env:
           ACCOUNT_ID: 799776970420
           ACCOUNT_NAME: sandbox
-        run: npm run deploy
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: arn:aws:iam::447002520154:role/github-deploy-role-cicd
-          aws-region: eu-west-1
+        run: npm run deploy -- --verbose
       - name: test deploy
         env:
           ACCOUNT_ID: 012208286009
           ACCOUNT_NAME: test
-        run: npm run deploy
+        run: npm run deploy -- --verbose
