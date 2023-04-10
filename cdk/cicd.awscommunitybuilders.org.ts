@@ -11,5 +11,5 @@ new CicdAwscommunitybuildersOrgStack(app, 'CicdAwscommunitybuildersOrgStack', {
     account: process.env.ACCOUNT_ID || '799776970420',
     region: process.env.CDK_DEFAULT_REGION,
   },
-  name: 'sandbox',
+  name: process.env.ACCOUNT_NAME || 'sandbox',
 });
