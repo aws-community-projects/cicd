@@ -23,11 +23,12 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: install
+        run: npm ci
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
           role-to-assume: arn:aws:iam::447002520154:role/github-oidc-stack-DeployRole885297C3-1VVRDT551FCCC
           aws-region: eu-west-1
       - name: cdk deploy
-        run: |
-          npm ci && npm run deploy
+        run: npm run deploy
