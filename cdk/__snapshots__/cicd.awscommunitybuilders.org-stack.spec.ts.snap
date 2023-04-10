@@ -242,30 +242,7 @@ exports[`Entire Stack > match a snapshot 1`] = `
     },
     "DeployWebsiteCustomResourceD116527B": {
       "DeletionPolicy": "Delete",
-      "Properties": {
-        "DestinationBucketName": {
-          "Ref": "WebsiteBucket75C24D94",
-        },
-        "DistributionId": {
-          "Ref": "Distribution830FAC52",
-        },
-        "DistributionPaths": [
-          "/*",
-        ],
-        "Prune": true,
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
-            "Arn",
-          ],
-        },
-        "SourceBucketNames": [
-          "cdk-hnb659fds-assets-123456-eu-west-1",
-        ],
-        "SourceObjectKeys": [
-          "f3a2740c33ec4f9b659a4d6d67c833575f0afb449a239afd3e8ce7d191d010fb.zip",
-        ],
-      },
+      "Properties": {"ServiceToken":{"Fn::GetAtt":["CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536","Arn"]},"SourceBucketNames":["cdk-hnb659fds-assets-123456-eu-west-1"],"SourceObjectKeys":["a4937e6e9d08f655c6a605d1367d9c8f832eb68aa089641373e0b698e387f1c1.zip"],"DestinationBucketName":{"Ref":"WebsiteBucket75C24D94"},"Prune":true,"DistributionId":{"Ref":"Distribution830FAC52"},"DistributionPaths":["/*"],"S3Key":"[HASH REMOVED].zip"},
       "Type": "Custom::CDKBucketDeployment",
       "UpdateReplacePolicy": "Delete",
     },
