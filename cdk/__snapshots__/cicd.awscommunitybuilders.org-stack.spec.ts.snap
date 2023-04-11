@@ -14,12 +14,7 @@ exports[`Entire Stack > match a snapshot 1`] = `
   },
   "Outputs": {
     "webUrl": {
-      "Value": {
-        "Fn::GetAtt": [
-          "Distribution830FAC52",
-          "DomainName",
-        ],
-      },
+      "Value": "cicd.test.awscommunitybuilders.org",
     },
   },
   "Parameters": {

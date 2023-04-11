@@ -138,6 +138,6 @@ export class CicdAwscommunitybuildersOrgStack extends Stack {
       zone: delegatedZone,
     });
 
-    new CfnOutput(this, 'webUrl', { value: distribution.domainName });
+    new CfnOutput(this, 'webUrl', { value: domainName });
   }
 }

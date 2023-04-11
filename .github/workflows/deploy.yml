@@ -31,9 +31,21 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::447002520154:role/github-deploy-role-cicd
           aws-region: eu-west-1
+      - name: start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          env: release
       - name: ${{ inputs.environment }} deploy
         env:
           ACCOUNT_ID: ${{ inputs.account_id }}
           ACCOUNT_NAME: ${{ inputs.environment }}
         run: npm run deploy
-  
+      - name: update deployment status
+        uses: bobheadxi/deployments@v1
+        with:
+          step: finish
+          status: ${{ job.status }}
+          env: cici.${{ inputs.environment }}.awscommunitybuilders.org
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
