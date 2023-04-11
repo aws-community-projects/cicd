@@ -37,7 +37,7 @@ jobs:
         id: deployment
         with:
           step: start
-          env: release
+          env: ${{ inputs.environment }}
       - name: ${{ inputs.environment }} deploy
         env:
           ACCOUNT_ID: ${{ inputs.account_id }}
