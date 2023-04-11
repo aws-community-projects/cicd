@@ -24,7 +24,7 @@ jobs:
       environment: test
   deploy-production:
     name: deploy to production
-    needs: deploy-sandbox
+    needs: deploy-test
     uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
     with:
       account-id: '865725118528'
