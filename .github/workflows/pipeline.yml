@@ -7,14 +7,14 @@ on:
 jobs:
   test:
     name: test
-    uses: aws-community-projects/cicd/.github/workflows/test.yml
+    uses: aws-community-projects/cicd/.github/workflows/test.yml@main
   deploy-sandbox:
     name: deploy to sandbox
     needs: test
     environment: sandbox
     runs-on: ubuntu-latest
     steps:
-      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml
+      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
         with:
           account-id: '799776970420'
           environment: sandbox
@@ -24,7 +24,7 @@ jobs:
     environment: test
     runs-on: ubuntu-latest
     steps:
-      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml
+      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
         with:
           account-id: '012208286009'
           environment: test
@@ -34,7 +34,7 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     steps:
-      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml
+      - uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
         with:
           account-id: '865725118528'
           environment: production
