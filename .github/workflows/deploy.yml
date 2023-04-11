@@ -1,16 +1,9 @@
 name: Deploy
-
-on:
-  push:
-    branches: [main]
+on: [workflow_call]
 
 jobs:
-  test:
-    name: test
-    uses: aws-community-projects/cicd/.github/workflows/test.yml@main
   deploy:
-    needs: test
-    name: deploy
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,13 +23,9 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::447002520154:role/github-deploy-role-cicd
           aws-region: eu-west-1
-      - name: sandbox deploy
+      - name: ${{ inputs.environment }} deploy
         env:
-          ACCOUNT_ID: '799776970420'
-          ACCOUNT_NAME: sandbox
+          ACCOUNT_ID: ${{ inputs.account_id }}
+          ACCOUNT_NAME: ${{ inputs.environment }}
         run: npm run deploy
-      - name: test deploy
-        env:
-          ACCOUNT_ID: '012208286009'
-          ACCOUNT_NAME: test
-        run: npm run deploy
+  
