@@ -13,19 +13,19 @@ jobs:
     needs: test
     uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
     with:
-      account-id: '799776970420'
+      account_id: '799776970420'
       environment: sandbox
   deploy-test:
     name: deploy to test
     needs: deploy-sandbox
     uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
     with:
-      account-id: '012208286009'
+      account_id: '012208286009'
       environment: test
   deploy-production:
     name: deploy to production
     needs: deploy-test
     uses: aws-community-projects/cicd/.github/workflows/deploy.yml@main
     with:
-      account-id: '865725118528'
+      account_id: '865725118528'
       environment: production

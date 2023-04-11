@@ -2,7 +2,7 @@ name: Deploy
 on: 
   workflow_call:
     inputs:
-      account-id:
+      account_id:
         required: true
         type: string
       environment:
