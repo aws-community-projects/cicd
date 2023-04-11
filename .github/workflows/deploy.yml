@@ -49,5 +49,5 @@ jobs:
           step: finish
           status: ${{ job.status }}
           env: ${{ inputs.environment }}
-          env_url: cici.${{ inputs.environment }}.awscommunitybuilders.org
+          env_url: https://cicd.${{ inputs.environment }}.awscommunitybuilders.org
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
