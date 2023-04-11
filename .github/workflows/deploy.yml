@@ -1,5 +1,13 @@
 name: Deploy
-on: [workflow_call]
+on: 
+  workflow_call:
+    inputs:
+      account-id:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
 
 jobs:
   deploy:
