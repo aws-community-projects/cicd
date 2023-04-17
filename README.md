@@ -1,14 +1,9 @@
-# Welcome to your CDK TypeScript project
+# CI/CD Demo using CDK, GitHub Actions and OIDC
 
-This is a blank project for CDK development with TypeScript.
+This CDK stack creates a simple web application and deploys it to three different environments using GitHub Actions and OIDC. This technique allows us to avoid creating an IAM User or a long-lived Access Key.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+This pipeline runs unit tests, then deploys to sandbox, followed by test, and finally production. If any of these steps fail, the pipeline will stop. Additionally the production environment is gated using [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) so any production deployments require a manual approval.
 
-## Useful commands
+Thanks to [aripalo](https://twitter.com/aripalo) for coming up with an easy way to create the necessary permissions with [aws-cdk-github-oidc](https://github.com/aripalo/aws-cdk-github-oidc).
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+The different environments are deployed to separate AWS Accounts as defined by the [Community Builders AWS Organization](https://github.com/aws-community-projects/aws-organization-for-devs). Rather than create an OIDC connection with each of these accounts, the Community Builders Organization uses a Deployments OU which has a cross-account trust relationship to deploy to the application accounts.
