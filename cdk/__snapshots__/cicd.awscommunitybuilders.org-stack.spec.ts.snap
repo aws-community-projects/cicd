@@ -32,6 +32,11 @@ exports[`Entire Stack > match a snapshot 1`] = `
       ],
       "Properties": {
         "Code": {"S3Bucket":"cdk-hnb659fds-assets-123456-eu-west-1","S3Key":"[HASH REMOVED].zip"},
+        "Environment": {
+          "Variables": {
+            "AWS_CA_BUNDLE": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem",
+          },
+        },
         "Handler": "index.handler",
         "Layers": [
           {
@@ -193,7 +198,7 @@ exports[`Entire Stack > match a snapshot 1`] = `
             ],
           ],
         },
-        "Handler": "__entrypoint__.handler",
+        "Handler": "index.handler",
         "MemorySize": 128,
         "Role": {
           "Fn::GetAtt": [
@@ -201,7 +206,7 @@ exports[`Entire Stack > match a snapshot 1`] = `
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",
